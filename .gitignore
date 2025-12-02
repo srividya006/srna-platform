@@ -1,0 +1,65 @@
+# ---- Python cache / bytecode ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ---- Conda / virtual envs ----
+env/
+venv/
+.venv/
+.conda/
+*.env
+
+# ---- Build & log files ----
+*.log
+*.out
+*.err
+
+# ---- IDE / editor files ----
+.vscode/
+.idea/
+*.swp
+*~
+
+# ---- FastAPI / runtime artifacts ----
+uvicorn.log
+*.db.sqlite3
+
+# ---- Data & predictions ----
+data/
+datasets/
+results/
+output/
+tmp/
+
+# ---- Bioinformatics dump files ----
+*.fa
+*.fasta
+*.gz
+*.csv
+*.tsv
+*.fastq
+*.gff
+*.bak
+
+# ---- Local artifacts ----
+*.cache
+.cache/
+__results__/
+checking/
+
+# ---- System & cloud junk ----
+.DS_Store
+*.pid
+nohup.out
+
+# ---- Docker & container ----
+*.img
+*.qcow2
+
+# ---- Secret keys / auth ----
+config.json
+secrets.json
+*.pem
+*.key
