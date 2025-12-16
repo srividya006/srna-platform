@@ -1,0 +1,47 @@
+{
+  "dataset": {
+    "n_samples": 29,
+    "feature_columns": [
+      "deltaG_predicted",
+      "gc_content_srna",
+      "gc_content_mrna",
+      "seed_length",
+      "has_seed",
+      "hybrid_length"
+    ],
+    "target": "label_strength"
+  },
+  "models": {
+    "rf": {
+      "name": "RandomForest",
+      "available": true,
+      "regression": {
+        "r2": 0.585055324377455,
+        "rmse": 0.12271265848201736,
+        "mae": 0.08689655172413818
+      },
+      "binary": {
+        "roc_auc": 0.8603896103896104,
+        "average_precision": 0.9263253015895454
+      }
+    },
+    "xgb": {
+      "name": "XGBoost",
+      "available": false
+    },
+    "intarna_baseline": {
+      "name": "IntaRNA \u0394G baseline",
+      "available": true,
+      "regression": {
+        "r2": -8.346277283354508,
+        "rmse": 0.5823895818735828,
+        "mae": 0.49726491008918466
+      },
+      "binary": {
+        "roc_auc": 0.4188311688311689,
+        "average_precision": 0.7569886363117139
+      }
+    }
+  },
+  "generated_at": "2025-12-06T16:55:58.648625Z"
+}

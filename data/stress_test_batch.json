@@ -1,0 +1,249 @@
+{
+  "requests": [
+
+  {
+    "srna": "AUUAAACUUCUUAUAAGGAGGUUUGACAUUUUUACAGCAGAAAUAUCAUGUAUUUUAUAAAAAUAAGGGCGUGAAAUAUUUCGGAUCAUAUUUUUUAUAAUAGGCGUUACACACCACCUUGUCAACUUUUA",
+    "mrna": "AAUAUAAUAAAAGGUAUAACAAAAAUG",
+    "organism": "Staphylococcus aureus",
+    "srna_name": "MrsI",
+    "mrna_name": "bfrA 5' UTR"
+  },
+  {
+    "srna": "GCCGCAUUCAUUUUGCGGGACUUCCAUGCUCAGCGGUUCAGUGCUUGUGAAAGCCACCAGAUUGGUCCUGCAGGCUGAGGCCACCAUCAAGUGUGGCUGCUCCUGCUUUUCCGGCUAAAGGUUGGGUGACC",
+    "mrna": "GCCACACUUUUGAGGA",
+    "organism": "Escherichia coli",
+    "srna_name": "Mcr7",
+    "mrna_name": "tatC 5' UTR"
+  },
+  {
+    "srna": "GGGCGUGGUGGCCGAUCCCCCACCGACGACCCGCCGCCUCCGCUAGCGAAGGCGGGCGACUGCCGCCGAAAGGCCGCGCGCCGAGGCGCGCAAGGCGCGCCUCAUCCCGGGGUGGGGCGGAAACACC",
+    "mrna": "CCUCUUCCUCCGCGGCUUUCGCGC",
+    "organism": "Mycobacterium tuberculosis",
+    "srna_name": "6C RNA",
+    "mrna_name": "prpR 5' UTR"
+  },
+  {
+    "srna": "CAGACAAGAAUUUGCUUACCUGACGGUGACACCCUGCUUUUGGUAAAGGUCAACACU",
+    "mrna": "AAAUAUAAAUUAAUUACUUUUAUGA",
+    "organism": "Escherichia coli",
+    "srna_name": "MicF",
+    "mrna_name": "ompF 5' UTR"
+  },
+  {
+    "srna": "CGGCAACGUAAAGUAACCCGCCCCUUAGCGCCGAAUGUUAAUACGACUUACC",
+    "mrna": "UAGCUUACUCUUCAAGAAAAAAGG",
+    "organism": "Escherichia coli",
+    "srna_name": "RyhB",
+    "mrna_name": "sodB 5' UTR"
+  },
+  {
+    "srna": "GGCGCUGUGGCGCAACGCGUAAACGGCCACCACUGGGAAGCGGCGCUGCCC",
+    "mrna": "AAAUAAAGGUAUUAAUAAUAAUAAUG",
+    "organism": "Escherichia coli",
+    "srna_name": "DsrA",
+    "mrna_name": "hns 5' UTR"
+  },
+  {
+    "srna": "GUCAACAGUUUCAGCGCAACAGAAUGUGCUUUGCGGGGAAGUCGUCAGG",
+    "mrna": "AAUUAAUAGGAUAAUACUAAUGA",
+    "organism": "Salmonella enterica",
+    "srna_name": "Spot42",
+    "mrna_name": "galK 5' UTR"
+  },
+  {
+    "srna": "AACGCUUCAUUUUAACCGCCUCCAGGCGGUUUUCUGAGCGAGCUCC",
+    "mrna": "UAAAUAAAGGAGGUUUUUUAUG",
+    "organism": "Escherichia coli",
+    "srna_name": "GcvB",
+    "mrna_name": "dppA 5' UTR"
+  },
+  {
+    "srna": "GCAUCAAAUGCGUCAGGUGCGUUUGAACACCUUCAAGGCUGCAGCAUGAAGCG",
+    "mrna": "AAUAAUAAAGGAACUACUUAUGA",
+    "organism": "Vibrio cholerae",
+    "srna_name": "Qrr1",
+    "mrna_name": "hapR 5' UTR"
+  },
+  {
+    "srna": "CAGUUAGUUUACCUUUACCCGCUUGAAGCGUUUUAAAGCGAAAGCUCC",
+    "mrna": "UAAUAAAGGUAUUUUUUUUUUUUGA",
+    "organism": "Escherichia coli",
+    "srna_name": "SgrS",
+    "mrna_name": "ptsG 5' UTR"
+  },
+  {
+    "srna": "GCCGUAUAGCUCAACUGUAACGCGUUAGCUGGCUUUCCU",
+    "mrna": "AAUAAAGGUUUUAUAAUAAUAAUG",
+    "organism": "Escherichia coli",
+    "srna_name": "RprA",
+    "mrna_name": "rpoS 5' UTR"
+  },
+  {
+    "srna": "AUUAAUAAAGGUAGCUAUUACUUUUUGCUUUUUGCAU",
+    "mrna": "UAAUAAAGGUAGUUUUUAAUAAUG",
+    "organism": "Pseudomonas aeruginosa",
+    "srna_name": "PrrF1",
+    "mrna_name": "sodB 5' UTR"
+  },
+   {
+    "srna": "CAGACAAGAAUUUGCUUACCUGACGGUGACACCCUGCUUUUGGUAAAGGUCAACACU",
+    "mrna": "AAAUAUAAAUUAAUUACUUUUAUGA",
+    "srna_name": "MicF",
+    "mrna_name": "ompF",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "CGGCAACGUAAAGUAACCCGCCCCUUAGCGCCGAAUGUUAAUACGACUUACC",
+    "mrna": "UAGCUUACUCUUCAAGAAAAAAGG",
+    "srna_name": "RyhB",
+    "mrna_name": "sodB",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct repression via 5' UTR"
+  },
+  {
+    "srna": "GGCGCUGUGGCGCAACGCGUAAACGGCCACCACUGGGAAGCGGCGCUGCCC",
+    "mrna": "AAAUAAAGGUAUUAAUAAUAAUAAUG",
+    "srna_name": "DsrA",
+    "mrna_name": "hns",
+    "organism": "Escherichia coli",
+    "mechanism": "Anti-antisense activation"
+  },
+  {
+    "srna": "GUCAACAGUUUCAGCGCAACAGAAUGUGCUUUGCGGGGAAGUCGUCAGG",
+    "mrna": "AAUUAAUAGGAUAAUACUAAUGA",
+    "srna_name": "Spot42",
+    "mrna_name": "galK",
+    "organism": "Salmonella enterica",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "AACGCUUCAUUUUAACCGCCUCCAGGCGGUUUUCUGAGCGAGCUCC",
+    "mrna": "UAAAUAAAGGAGGUUUUUUAUG",
+    "srna_name": "GcvB",
+    "mrna_name": "dppA",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct repression via RBS"
+  },
+  {
+    "srna": "GCAUCAAAUGCGUCAGGUGCGUUUGAACACCUUCAAGGCUGCAGCAUGAAGCG",
+    "mrna": "AAUAAUAAAGGAACUACUUAUGA",
+    "srna_name": "Qrr1",
+    "mrna_name": "hapR",
+    "organism": "Vibrio cholerae",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "CAGUUAGUUUACCUUUACCCGCUUGAAGCGUUUUAAAGCGAAAGCUCC",
+    "mrna": "UAAUAAAGGUAUUUUUUUUUUUUGA",
+    "srna_name": "SgrS",
+    "mrna_name": "ptsG",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct repression + RNaseE degradation"
+  },
+  {
+    "srna": "GCCGUAUAGCUCAACUGUAACGCGUUAGCUGGCUUUCCU",
+    "mrna": "AAUAAAGGUUUUAUAAUAAUAAUG",
+    "srna_name": "RprA",
+    "mrna_name": "rpoS",
+    "organism": "Escherichia coli",
+    "mechanism": "Anti-antisense activation"
+  },
+  {
+    "srna": "AUUAAUAAAGGUAGCUAUUACUUUUUGCUUUUUGCAU",
+    "mrna": "UAAUAAAGGUAGUUUUUAAUAAUG",
+    "srna_name": "PrrF1",
+    "mrna_name": "sodB",
+    "organism": "Pseudomonas aeruginosa",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "CGCUCCUCCUCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCC",
+    "mrna": "AAUAAAGGUAUAAUAAUAAUAAUG",
+    "srna_name": "MicC",
+    "mrna_name": "ompC",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "GGCAACGUAAAGUAACCCGCCCCUUAGCGCCGAAUGUUAAUACGACUUACC",
+    "mrna": "UAGCUUACUCUUCAAGAAAAAAGG",
+    "srna_name": "RyhB",
+    "mrna_name": "sdhD",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct 5' UTR repression"
+  },
+  {
+    "srna": "CUCAACAGUUUCAGCGCAACAGAAUGUGCUUUGCGGGGAAGUCGUCAGG",
+    "mrna": "AAUUAAUAGGAUAAUACUAAUGA",
+    "srna_name": "Spot42",
+    "mrna_name": "galE",
+    "organism": "Salmonella enterica",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "AUUAAACUUCUUAUAAGGAGGUUUGACAUUUUUACAGCAGAAAUAUCAUGUAUUUUAUAAAAAUAAGGGCGUGAAAUAUUUCGGAUCAUAUUUUUUAUAAUAGGCGUUACACACCACCUUGUCAACUUUUA",
+    "mrna": "AAUAUAAUAAAAGGUAUAACAAAAAUG",
+    "srna_name": "MrsI",
+    "mrna_name": "bfrA",
+    "organism": "Staphylococcus aureus",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "GCCGCAUUCAUUUUGCGGGACUUCCAUGCUCAGCGGUUCAGUGCUUGUGAAAGCCACCAGAUUGGUCCUGCAGGCUGAGGCCACCAUCAAGUGUGGCUGCUCCUGCUUUUCCGGCUAAAGGUUGGGUGACC",
+    "mrna": "GCCACACUUUUGAGGA",
+    "srna_name": "Mcr7",
+    "mrna_name": "tatC",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "GGGCGUGGUGGCCGAUCCCCCACCGACGACCCGCCGCCUCCGCUAGCGAAGGCGGGCGACUGCCGCCGAAAGGCCGCGCGCCGAGGCGCGCAAGGCGCGCCUCAUCCCGGGGUGGGGCGGAAACACC",
+    "mrna": "CCUCUUCCUCCGCGGCUUUCGCGC",
+    "srna_name": "6C RNA",
+    "mrna_name": "prpR",
+    "organism": "Mycobacterium tuberculosis",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "CAGACAAGAAUUUGCUUACCUGACGGUGACACCCUGCUUUUGGUAAAGGUCAACACU",
+    "mrna": "AAAUAUAAAUUAAUUACUUUUAUGA",
+    "srna_name": "MicF",
+    "mrna_name": "ompF",
+    "organism": "Salmonella enterica",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "AACGCUUCAUUUUAACCGCCUCCAGGCGGUUUUCUGAGCGAGCUCC",
+    "mrna": "UAAAUAAAGGAGGUUUUUUAUG",
+    "srna_name": "GcvB",
+    "mrna_name": "oppA",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "GUCAACAGUUUCAGCGCAACAGAAUGUGCUUUGCGGGGAAGUCGUCAGG",
+    "mrna": "AAUUAAUAGGAUAAUACUAAUGA",
+    "srna_name": "Spot42",
+    "mrna_name": "galT",
+    "organism": "Salmonella enterica",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "CGCUCCUCCUCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCCUCC",
+    "mrna": "AAUAAAGGUAUAAUAAUAAUAAUG",
+    "srna_name": "MicC",
+    "mrna_name": "ompF",
+    "organism": "Escherichia coli",
+    "mechanism": "Direct RBS occlusion"
+  },
+  {
+    "srna": "GCAUCAAAUGCGUCAGGUGCGUUUGAACACCUUCAAGGCUGCAGCAUGAAGCG",
+    "mrna": "AAUAAUAAAGGAACUACUUAUGA",
+    "srna_name": "Qrr4",
+    "mrna_name": "aphA",
+    "organism": "Vibrio cholerae",
+    "mechanism": "Direct RBS occlusion"
+  }
+]
+}

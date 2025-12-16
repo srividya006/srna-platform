@@ -1,3 +1,5 @@
+from pathlib import Path
+import json
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List, Optional
@@ -10,6 +12,16 @@ import shutil
 import os
 import uuid
 import csv
+
+
+def find_intarna_bin():
+    for name in ("IntaRNA3", "IntaRNA2", "IntaRNA1", "intarna"):
+        path = shutil.which(name)
+        if path:
+            return path
+    return None
+
+INTARNA_BIN = find_intarna_bin()
 
 app = FastAPI(title="sRNA–mRNA Interaction Platform", version="0.5.0")
 
@@ -257,8 +269,12 @@ def predict_simple(payload: dict):
     if not srna or not mrna:
         return {"error": "Provide 'srna' and 'mrna' in JSON body."}
 
-    if not shutil.which("IntaRNA"):
-        return {"error": "IntaRNA not found on PATH"}
+    if not INTARNA_BIN:
+        return {
+            "error": "No IntaRNA executable found (checked IntaRNA3/2/1)",
+            "hint": "Ensure Conda environment with IntaRNA is active when starting uvicorn"
+
+        }
 
     qf = f"/tmp/q_{uuid.uuid4().hex}.fa"
     tf = f"/tmp/t_{uuid.uuid4().hex}.fa"
@@ -296,8 +312,11 @@ def run_intarna(req: IntaRNARequest) -> dict:
     Core logic for running IntaRNA and parsing structured output.
     Reused by /predict_intarna, /batch_predict, and /explain.
     """
-    if not shutil.which("IntaRNA"):
-        return {"error": "IntaRNA binary not found on PATH"}
+    if not INTARNA_BIN:
+        return {
+            "error": "No IntaRNA executable found (checked IntaRNA3/2/1)",
+            "hint": "Ensure Conda environment with IntaRNA is active when starting uvicorn"
+        }
 
     srna_seq = req.srna.strip()
     mrna_seq = req.mrna.strip()
@@ -325,7 +344,7 @@ def run_intarna(req: IntaRNARequest) -> dict:
 
         # Use CSV mode; let IntaRNA choose default columns.
         cmd = [
-            "IntaRNA",
+            INTARNA_BIN,
             "-q", qf,
             "-t", tf,
             "--outMode=C",
@@ -646,3 +665,57 @@ def explain_endpoint(req: IntaRNARequest):
         "raw_stderr": base.get("raw_stderr"),
     }
 
+
+# ========== 
+# Validation / metrics endpoint 
+# ==========
+
+METRICS_PATH = Path("data") / "validation_metrics.json"
+VALIDATION_SCRIPT = Path("notebooks") / "validation.py"
+
+
+@app.get("/metrics")
+def get_metrics(refresh: bool = False):
+    """
+    Return validation / benchmarking metrics as JSON.
+
+    - If refresh=true and notebooks/validation.py exists, 
+      this will call the script to recompute metrics.
+    - Otherwise, it just reads data/validation_metrics.json.
+    """
+    # Optionally recompute via script
+    if refresh:
+        if VALIDATION_SCRIPT.exists():
+            try:
+                proc = subprocess.run(
+                    ["python", str(VALIDATION_SCRIPT)],
+                    capture_output=True,
+                    text=True,
+                    timeout=300,
+                )
+                if proc.returncode != 0:
+                    return {
+                        "error": "validation.py exited with non-zero status",
+                        "stdout": proc.stdout,
+                        "stderr": proc.stderr,
+                    }
+            except Exception as e:
+                return {"error": f"Failed to run validation.py: {e}"}
+        else:
+            return {
+                "error": "validation.py not found; cannot recompute metrics automatically."
+            }
+
+    # Read metrics JSON
+    if METRICS_PATH.exists():
+        try:
+            with open(METRICS_PATH, "r") as f:
+                data = json.load(f)
+            return data
+        except Exception as e:
+            return {"error": f"Failed to read metrics file: {e}"}
+    else:
+        return {
+            "error": "validation_metrics.json not found. "
+                     "Run notebooks/validation.py or call /metrics?refresh=true first."
+        }
