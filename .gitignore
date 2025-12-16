@@ -9,12 +9,17 @@ env/
 venv/
 .venv/
 .conda/
-*.env
 
-# ---- Build & log files ----
+# ---- Environment secrets (DO NOT COMMIT) ----
+*.env
+config.json
+secrets.json
+*.pem
+*.key
+
+# ---- Logs ----
 *.log
-*.out
-*.err
+nohup.out
 
 # ---- IDE / editor files ----
 .vscode/
@@ -22,44 +27,20 @@ venv/
 *.swp
 *~
 
-# ---- FastAPI / runtime artifacts ----
-uvicorn.log
-*.db.sqlite3
+# ---- Docker runtime junk ----
+*.pid
+*.img
+*.qcow2
 
-# ---- Data & predictions ----
-data/
-datasets/
-results/
-output/
+# ---- OS junk ----
+.DS_Store
+
+# ---- Temporary / scratch ----
 tmp/
-
-# ---- Bioinformatics dump files ----
-*.fa
-*.fasta
-*.gz
-*.csv
-*.tsv
-*.fastq
-*.gff
-*.bak
-
-# ---- Local artifacts ----
-*.cache
 .cache/
 __results__/
 checking/
 
-# ---- System & cloud junk ----
-.DS_Store
-*.pid
-nohup.out
-
-# ---- Docker & container ----
-*.img
-*.qcow2
-
-# ---- Secret keys / auth ----
-config.json
-secrets.json
-*.pem
-*.key
+# ---- IGNORE only LARGE / RAW bioinformatics dumps ----
+data/raw_large/
+datasets/raw_large/
