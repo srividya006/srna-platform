@@ -19,11 +19,21 @@ feature_cols = [
     "seed_length",
     "has_seed",
     "hybrid_length",
+    "target_accessibility",
 ]
 target_col = "label_strength"
 
+# Fill missing feature values
+df["deltaG_predicted"] = df["deltaG_predicted"].fillna(0)
+df["gc_content_srna"] = df["gc_content_srna"].fillna(0)
+df["gc_content_mrna"] = df["gc_content_mrna"].fillna(0)
+df["seed_length"] = df["seed_length"].fillna(0)
+df["has_seed"] = df["has_seed"].fillna(0)
+df["hybrid_length"] = df["hybrid_length"].fillna(0)
+df["target_accessibility"] = df["target_accessibility"].fillna(0)
+
 # Keep only rows with all features + label present
-df_clean = df.dropna(subset=feature_cols + [target_col])
+df_clean = df.dropna(subset=[target_col])
 
 X = df_clean[feature_cols].astype(float)
 y = df_clean[target_col].astype(float)
@@ -47,4 +57,4 @@ print("MSE:", mean_squared_error(y_test, y_pred))
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 joblib.dump(model, MODEL_PATH)
-print(f"✅ Saved model to {MODEL_PATH}")
+print(f" Saved model to {MODEL_PATH}")

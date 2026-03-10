@@ -8,17 +8,20 @@ services:
       - "8080:8080"
     volumes:
       - ./data:/app/data
+      - ./src:/app/src
+    working_dir: /app/src  # <---This tells Docker to run from inside 'src'
+    # This runs the FastAPI/Uvicorn server
+    command: uvicorn app:app --host 0.0.0.0 --port 8080
     restart: unless-stopped
 
   frontend:
-    image: python:3.10-slim
+    build: .  # <--- Change this from 'image: python:3.10-slim'
     container_name: srna_frontend
     working_dir: /app
     volumes:
-      - ./streamlit_app:/app
-    command: >
-      sh -c "pip install streamlit requests &&
-             streamlit run app.py --server.port=8501 --server.address=0.0.0.0"
+      - .:/app  # Mount the whole directory to access streamlit_app folder
+    # This runs the Streamlit dashboard
+    command: streamlit run streamlit_app/app.py --server.port 8501 --server.address 0.0.0.0 
     ports:
       - "8501:8501"
     depends_on:

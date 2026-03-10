@@ -3,10 +3,11 @@ import json
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List, Optional
-from .ml_model import (
+from ml_model import (
     is_available as ml_is_available, 
     score_interaction as ml_score_interaction
 )
+from bio.accessibility import compute_accessibility, region_accessibility
 import subprocess
 import shutil
 import os
@@ -39,6 +40,52 @@ def gc_content(seq: str) -> float:
     seq = seq.upper()
     return (seq.count("G") + seq.count("C")) / len(seq)
 
+def run_rnacofold(srna_seq: str, mrna_seq: str):
+    """
+    Run RNAcofold on sRNA and mRNA sequences.
+    Returns structure and MFE.
+    """
+
+    if not shutil.which("RNAcofold"):
+        return None
+
+    input_seq = f"{srna_seq}&{mrna_seq}\n"
+
+    try:
+        proc = subprocess.run(
+            ["RNAcofold", "--noPS"],
+            input=input_seq,
+            text=True,
+            capture_output=True,
+            timeout=30
+        )
+    except Exception:
+        return None
+
+    if proc.returncode != 0:
+        return None
+
+    lines = proc.stdout.strip().splitlines()
+
+    if len(lines) < 2:
+        return None
+
+    struct_line = lines[1]
+
+    try:
+        paren_start = struct_line.rfind("(")
+        paren_end = struct_line.rfind(")")
+
+        structure = struct_line[:paren_start].strip()
+        mfe = float(struct_line[paren_start + 1:paren_end].strip())
+
+        return {
+            "structure": structure,
+            "mfe": mfe,
+        }
+
+    except Exception:
+        return None
 
 def find_seed_match(srna_seq: str, mrna_seq: str,
                     min_len: int = 6, max_len: int = 8) -> dict:
@@ -320,6 +367,9 @@ def run_intarna(req: IntaRNARequest) -> dict:
 
     srna_seq = req.srna.strip()
     mrna_seq = req.mrna.strip()
+    # Precompute accessibility for mRNA using RNAplfold
+    accessibility = compute_accessibility(mrna_seq)
+    
     if not srna_seq or not mrna_seq:
         return {"error": "Both 'srna' and 'mrna' sequences must be non-empty."}
 
@@ -391,7 +441,6 @@ def run_intarna(req: IntaRNARequest) -> dict:
             "stderr": stderr,
             "cmd": " ".join(cmd),
         }
-
     # Split lines, ignore empty ones and comments
     lines = [ln for ln in stdout.splitlines() if ln.strip() and not ln.startswith("#")]
 
@@ -405,7 +454,15 @@ def run_intarna(req: IntaRNARequest) -> dict:
         "gc_content_srna": srna_gc,
         "gc_content_mrna": mrna_gc,
         "seed_features": seed_info,
+        "duplex_structure": None,
+        "duplex_mfe": None
     }
+    # Run RNAcofold for duplex structure
+    cofold_result = run_rnacofold(srna_seq, mrna_seq)
+
+    if cofold_result:
+        base_response["duplex_structure"] = cofold_result.get("structure")
+        base_response["duplex_mfe"] = cofold_result.get("mfe")
 
     if not lines:
         # Absolutely no CSV lines at all
@@ -450,11 +507,21 @@ def run_intarna(req: IntaRNARequest) -> dict:
             q_end = safe_int(row.get("end1"))
             tgt_start = safe_int(row.get("start2"))
             tgt_end = safe_int(row.get("end2"))
+            # Compute accessibility score for the predicted target region
+            target_accessibility = None
+            if accessibility and tgt_start and tgt_end:
+                try:
+                    target_accessibility = region_accessibility(
+                        accessibility,
+                        tgt_start - 1,  # convert 1-based → 0-based
+                        tgt_end
+                    )
+                except Exception:
+                    target_accessibility = None	
 
             hybrid = row.get("hybridDP", "") or row.get("hybrid", "")
             mrna_name = row.get("id1") or row.get("seq1") or req.mrna_name
             srna_name = row.get("id2") or row.get("seq2") or req.srna_name
-
             hybrid_len = len(hybrid.replace("&", "").replace(" ", "")) if hybrid else None
 
             # --- ML score (uses global seed_info) ---
@@ -470,6 +537,7 @@ def run_intarna(req: IntaRNARequest) -> dict:
                     seed_length=seed_len,
                     has_seed=seed_flag,
                     hybrid_length=hybrid_len,
+                    target_accessibility=target_accessibility,
                 )
 
             interaction = {
@@ -656,6 +724,11 @@ def explain_endpoint(req: IntaRNARequest):
     return {
         "srna_name": base.get("srna_name"),
         "mrna_name": base.get("mrna_name"),
+        "cofold": {
+            "sequence": req.srna + "&" + req.mrna,
+            "structure": base.get("duplex_structure"),
+            "mfe": base.get("duplex_mfe")
+        },
         "top_interaction": top,
         "explain": explain,
         "gc_content_srna": base.get("gc_content_srna"),

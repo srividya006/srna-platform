@@ -44,3 +44,19 @@ checking/
 # ---- IGNORE only LARGE / RAW bioinformatics dumps ----
 data/raw_large/
 datasets/raw_large/
+
+# RNAplfold temporary files
+plfold_dp.ps
+plfold_lunp
+*_dp.ps
+*_lunp
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment
+venv/
+
+# logs
+*.log

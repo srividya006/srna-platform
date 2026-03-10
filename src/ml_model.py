@@ -22,6 +22,7 @@ FEATURE_ORDER = [
     "seed_length",
     "has_seed",
     "hybrid_length",
+    "target_accessibility",
 ]
 
 
@@ -63,6 +64,7 @@ def score_interaction(
     seed_length: Optional[float],
     has_seed: Optional[float],
     hybrid_length: Optional[float],
+    target_accessibility: Optional[float],
 ) -> Optional[float]:
     """
     Compute an ML score for a single interaction, using the feature vector:
@@ -76,13 +78,20 @@ def score_interaction(
         return None
 
     # All features must be present
-    feats = [deltaG, gc_srna, gc_mrna, seed_length, has_seed, hybrid_length]
-    if any(v is None for v in feats):
-        return None
+    feats = [deltaG, gc_srna, gc_mrna, seed_length, has_seed, hybrid_length, target_accessibility]
+    feats = [0.0 if v is None else v for v in feats]
+    
+    # Temporary debug print
+    print("ML features:", feats)
 
     try:
         feat_vec = [[float(f) for f in feats]]
-        score = model.predict(feat_vec)[0]
+        print("ML FEATURES:", feat_vec)
+
+        score = model.predict(feat_vec)[0]   # temporary
+        print("ML RAW SCORE:", score)
         return float(score)
-    except Exception:
+
+    except Exception as e:
+        print("ML ERROR:", e)
         return None
