@@ -51,12 +51,5 @@ plfold_lunp
 *_dp.ps
 *_lunp
 
-# Python cache
-__pycache__/
-*.pyc
-
-# Environment
-venv/
-
-# logs
-*.log
+*.joblib
+*.pkl

@@ -5,8 +5,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 import joblib
 
-DATA_PATH = "data/srna_augmented.csv"
-MODEL_DIR = "models"
+DATA_PATH = "../data/final_training_dataset_with_accessibility.csv"
+MODEL_DIR = "/tmp/models"
 MODEL_PATH = os.path.join(MODEL_DIR, "interaction_rf.joblib")
 
 # Load data
