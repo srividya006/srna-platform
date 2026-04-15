@@ -7,7 +7,7 @@ import altair as alt
 # ======================
 # CONFIG
 # ======================
-API_BASE = "http://localhost:8080"
+API_BASE = "http://srna-platform-backend.onrender.com"
 
 st.set_page_config(
     page_title="sRNA-mRNA Interaction Platform",
@@ -50,8 +50,8 @@ def run_predict(srna, mrna, srna_name, mrna_name, demo=False):
         res.raise_for_status()
         return res.json()
     except ConnectionError:
-        st.error("❌ Could not reach backend API at "
-                 f"{API_BASE}. Is uvicorn running on port 8080?")
+        st.error(f"❌ Could not reach backend API at "
+                 f"{API_BASE}. Check deployment!")
         return None
     except Exception as e:
         st.error(f"❌ API error: {e}")
@@ -114,7 +114,7 @@ with tab_predict:
     if st.button("Run IntaRNA Prediction"):
         result = run_predict(srna, mrna, srna_name, mrna_name, demo)
         
-        if "interactions" in result:
+        if result and "interactions" in result:
             interactions = result["interactions"]
             if interactions:
                 df = pd.DataFrame(interactions)
