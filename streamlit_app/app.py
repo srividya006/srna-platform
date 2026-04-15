@@ -12,7 +12,7 @@ try:
 except ImportError:
     HAS_PLOTLY = False
 
-API_BASE = "http://backend:8080"  # changed from http://localhost:8080 for deployment
+API_BASE = "https://srna-platform-backend.onrender.com"  # changed from http://backend:8080
 
 
 # -----------------------------------------------------------------------------
