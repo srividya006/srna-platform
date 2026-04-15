@@ -23,9 +23,9 @@ RUN pip install --no-cache-dir -r requirements.txt || true
 RUN pip install --no-cache-dir plotly
 
 # Expose ports for both services
-EXPOSE 8080 8501
+EXPOSE PORT=10000
 
 # The CMD is usually handled by docker-compose, so we leave it generic here
-CMD ["python", "src/app.py"]
+CMD ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "10000"]
 
 
