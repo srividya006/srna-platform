@@ -113,7 +113,7 @@ def make_dg_bar_chart(df: pd.DataFrame):
         xaxis_title="Interaction rank (IntaRNA)",
         yaxis_title="ΔG (kcal/mol)",
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 def make_violin_plot(df: pd.DataFrame):
@@ -150,7 +150,7 @@ def make_violin_plot(df: pd.DataFrame):
         title="Distribution of ΔG and ML scores (violin plot)",
         yaxis_title="Value",
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 def make_arc_figure(df: pd.DataFrame):
@@ -190,7 +190,7 @@ def make_arc_figure(df: pd.DataFrame):
         showlegend=True,
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 def make_graphical_duplex(subseq_dp: str, hybrid_dp: str):
     """
@@ -259,7 +259,7 @@ def make_graphical_duplex(subseq_dp: str, hybrid_dp: str):
         showlegend=True,
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 def highlight_sequence_html(seq: str,
@@ -368,7 +368,7 @@ def make_dotbracket_arc(sequence: str, structure: str):
         xaxis_title="Position in concatenated sequence",
         yaxis_title="Arc height (visual only)",
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 # -----------------------------------------------------------------------------
 # MAIN INPUT PANEL (center, not sidebar)
@@ -494,7 +494,7 @@ with tab_predict:
             df = pd.DataFrame(interactions)
 
             st.markdown("####  Interactions Table")
-            st.dataframe(df, use_container_width=True)
+            st.dataframe(df, width="stretch")
 
             # ΔG bar chart
             st.markdown("####  ΔG Binding Energies")
@@ -667,7 +667,7 @@ with tab_batch:
 
         if batch_df is not None:
             st.markdown("### Preview of uploaded data")
-            st.dataframe(batch_df.head(), use_container_width=True)
+            st.dataframe(batch_df.head(), width="stretch")
 
             # We’ll try to be flexible with column names
             def get_col(df, options, required=False, desc=""):
@@ -751,7 +751,7 @@ with tab_batch:
 
                 out_df = pd.DataFrame(all_interactions)
                 st.markdown("### Combined batch interactions")
-                st.dataframe(out_df, use_container_width=True)
+                st.dataframe(out_df, width="stretch")
 
                 # ---- If label_strength exists, compute evaluation metrics ----
                 if col_label is not None:
@@ -815,7 +815,7 @@ with tab_batch:
                                 hover_data=["srna_name", "mrna_name", "deltaG"],
                                 title="Label strength vs ML score (batch)",
                             )
-                            st.plotly_chart(fig_scatter, use_container_width=True)
+                            st.plotly_chart(fig_scatter, width="stretch")
                         else:
                             st.info(
                                 "Install `plotly` to see performance scatter plot "
@@ -916,7 +916,7 @@ with tab_validation:
     # -------------------------
     with col_right:
         st.markdown("#### Model comparison table")
-        st.dataframe(df_metrics.set_index("model"), use_container_width=True)
+        st.dataframe(df_metrics.set_index("model"), width="stretch")
 
     # Simple bar plot comparing R² across models
     st.markdown("#### R² comparison")
@@ -931,7 +931,7 @@ with tab_validation:
         template="plotly_white",
         height=400,
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     # Optional: second chart for ROC AUC
     st.markdown("#### ROC AUC comparison (where available)")
@@ -946,7 +946,7 @@ with tab_validation:
         template="plotly_white",
         height=400,
     )
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, width="stretch")
 
     st.caption(
         f"Last metrics generation: {metrics.get('generated_at', 'n/a')}"
@@ -970,7 +970,7 @@ with tab_validation:
             )
 
             with st.expander("Preview first rows"):
-                st.dataframe(df_val.head(), use_container_width=True)
+                st.dataframe(df_val.head(), width="stretch")
         except Exception as e:
             st.error(f"Failed to load validation_with_predictions.csv: {e}")
     else:
